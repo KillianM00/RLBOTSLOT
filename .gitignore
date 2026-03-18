@@ -1,0 +1,15 @@
+replay_system/replay_cache/*.replay
+models/checkpoints/*.pt
+models/checkpoints/*.pth
+models/checkpoints/rlgym_ppo/
+*.dat
+*.env
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+.venv-wsl/
+wandb/
+autoresearch/experiments.jsonl
+*.pkl
+_netrc
