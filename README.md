@@ -1,17 +1,24 @@
-# RLBOTSLOT — Rocket League Reinforcement Learning Research
+# RLBOTSLOT — Simulation-Based Reinforcement Learning
 
-A Python research project for training Rocket League agents in simulation and
-exploring how specialist neural networks, replay-derived behaviors, and automated
-experiments can support reinforcement learning.
+**Python · PyTorch · PPO · multiprocessing**
 
-The repository demonstrates applied machine learning, simulation engineering,
-asynchronous data pipelines, numerical programming, and experiment tooling. It
-combines a configurable RocketSim/rlgym-ppo training path with separately
-implemented mixture-of-experts and trajectory-evaluation components.
+An experimental Rocket League reinforcement-learning pipeline centered on simulation adapters, object-centric observations, recurrent policy state, and PPO training. The repository documents both implemented components and the work still required to validate a full training run.
 
-**Status:** experimental research software. Component implementations are present;
-several training integrations remain incomplete. No competitive rank, measured
-win-rate improvement, or GPU speedup is claimed.
+## Engineering focus
+
+- **Learning systems:** Object-centric policy inputs and recurrent state connect environment observations to policy/value learning.
+- **Training infrastructure:** Vectorized worker orchestration, checkpointing, configuration, and optional telemetry organize experiment execution.
+- **Evidence-driven iteration:** A CPU synthetic smoke path checks pipeline wiring independently of the game simulator; component tests expose unresolved expectations.
+
+## Evidence and scope
+
+Research prototype with no verified competitive rank or full-training result. Current component validation is 46 passed and five failed tests; the documented CPU synthetic smoke passes. A smoke run does not establish learning quality.
+
+## Source guide
+
+- [Architecture and source map](README.md#architecture)
+- [Component tests](tests)
+- [Training entry point](train.py)
 
 ## Project highlights
 
