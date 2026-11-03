@@ -13,3 +13,20 @@ wandb/
 autoresearch/experiments.jsonl
 *.pkl
 _netrc
+
+# Local credentials, editor state, and generated research data
+.env.*
+!.env.example
+.*.local.json
+.claude/
+logs/
+*.log
+*.db
+*.db-*
+*.sqlite
+*.sqlite3
+*.replay
+.pytest_cache/
+.ruff_cache/
+*.pem
+*.key

@@ -1,5 +1,9 @@
 # Plan: GPU Acceleration + Integrated Autoresearch + Quantum Optimization
 
+> Historical research proposal. Performance figures and speedups below are
+> unverified targets. Hardware compatibility and installation commands require
+> independent validation. See the README for current implementation limitations.
+
 ## Context
 Two problems: (1) The RX 6700 XT GPU is completely idle — all training runs on CPU at ~1.5-3k steps/sec. (2) Autoresearch and main training are separate systems that don't talk to each other. This plan fixes both: unlock the GPU via WSL2+ROCm for 10-50x speedup, then integrate autoresearch with quantum-inspired search.
 
@@ -20,7 +24,7 @@ Two problems: (1) The RX 6700 XT GPU is completely idle — all training runs on
    - Set gfx version override: `echo 'export HSA_OVERRIDE_GFX_VERSION=10.3.0' >> ~/.bashrc`
    - Install PyTorch ROCm: `pip3 install torch torchvision --index-url https://download.pytorch.org/whl/rocm6.2`
    - Verify: `python3 -c "import torch; print(torch.cuda.is_available(), torch.cuda.get_device_name(0))"`
-3. **Clone/mount the project** in WSL2 (access Windows files via `$HOME/RLBOTSLOT/`)
+3. **Clone the project** in WSL2, for example into `~/RLBOTSLOT/`.
 4. **Create WSL venv**, install all deps including rlgym-ppo
 5. **Create `scripts/train_wsl.sh`** — launcher script that sets env vars and runs training
 6. **Update `config.py`**: `DEVICE` auto-detection now finds ROCm as `"cuda"` (ROCm uses CUDA API)
@@ -49,7 +53,7 @@ Two problems: (1) The RX 6700 XT GPU is completely idle — all training runs on
 #!/bin/bash
 export HSA_OVERRIDE_GFX_VERSION=10.3.0
 export PYTORCH_HIP_ALLOC_CONF=max_split_size_mb:512
-cd $HOME/RLBOTSLOT
+cd ~/RLBOTSLOT
 source .venv-wsl/bin/activate
 python train.py "$@"
 ```

@@ -1,5 +1,6 @@
 #!/bin/bash
 set -e
+RLBOT_ROOT="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd)"
 
 # === ROCm repo + key ===
 echo ">>> Adding ROCm repo..."
@@ -31,9 +32,9 @@ echo ">>> Installing PyTorch ROCm (~2.5GB download)..."
 pip install --upgrade pip
 pip install torch torchvision --index-url https://download.pytorch.org/whl/rocm6.2
 
-# === Install project deps (reads requirements from Windows mount, installs to Linux) ===
+# === Install project dependencies from this checkout ===
 echo ">>> Installing project requirements..."
-pip install -r $HOME/RLBOTSLOT/requirements.txt
+pip install -r "$RLBOT_ROOT/requirements.txt"
 
 # === Test GPU ===
 echo ">>> Testing GPU detection..."
@@ -50,4 +51,4 @@ else:
 "
 
 echo "=== SETUP COMPLETE ==="
-echo "To train: wsl -d Ubuntu-24.04 -- bash $HOME/RLBOTSLOT/scripts/train_wsl.sh"
+echo "To train from Linux or WSL: bash \"$RLBOT_ROOT/scripts/train_wsl.sh\""
